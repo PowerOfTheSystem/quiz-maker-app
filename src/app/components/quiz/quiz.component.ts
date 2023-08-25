@@ -11,11 +11,12 @@ import {
 } from '@angular/forms';
 import { QuestionComponent } from '../../shared/components/question/question.component';
 import { RouterModule } from '@angular/router';
-import { TriviaService } from 'src/app/services/trivia.service';
-import { Difficulty } from 'src/app/models/difficulty.model';
-import { Category } from 'src/app/models/category.model';
-import { Question } from 'src/app/models/question.model';
-import { QuizService } from 'src/app/services/quiz.service';
+import { TriviaService } from '../../services/trivia.service';
+import { Difficulty } from '../../models/difficulty.model';
+import { Category } from '../../models/category.model';
+import { Question } from '../../models/question.model';
+import { QuizService } from '../../services/quiz.service';
+import { QuizForm } from './quiz.form';
 
 @Component({
   selector: 'app-quiz',
@@ -36,7 +37,11 @@ export class QuizComponent implements OnInit, OnDestroy {
   questionFormArray: FormArray<FormControl<string>>;
 
   categories?: Observable<Category[]>;
-  difficulties?: Observable<Difficulty[]>;
+  difficulties?: Difficulty[] = [
+    { value: 'easy', name: 'Easy' },
+    { value: 'medium', name: 'Medium' },
+    { value: 'high', name: 'High' },
+  ];
   questions?: Observable<Question[]>;
 
   constructor(

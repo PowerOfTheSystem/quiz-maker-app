@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionComponent } from '../../../shared/components/question/question.component';
 import { RouterModule } from '@angular/router';
 import { NgFor } from '@angular/common';
-import { ScoreComponent } from 'src/app/shared/components/score/score.component';
-import { Question } from 'src/app/models/question.model';
-import { QuizService } from 'src/app/services/quiz.service';
+import { ScoreComponent } from '../../../shared/components/score/score.component';
+import { Question } from '../../../models/question.model';
+import { QuizService } from '../../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz-result',

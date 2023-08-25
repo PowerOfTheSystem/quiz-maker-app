@@ -1,7 +1,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Question } from 'src/app/models/question.model';
+import { Question } from '../../../models/question.model';
 
 @Component({
   selector: 'app-question',

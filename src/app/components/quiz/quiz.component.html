@@ -27,14 +27,11 @@
       required
     >
       <option value="" disabled>Select difficulty</option>
-      <option [value]="QuestionDifficulty.EASY">
-        {{ QuestionDifficulty.EASY }}
-      </option>
-      <option [value]="QuestionDifficulty.MEDIUM">
-        {{ QuestionDifficulty.MEDIUM }}
-      </option>
-      <option [value]="QuestionDifficulty.HARD">
-        {{ QuestionDifficulty.HARD }}
+      <option
+        *ngFor="let difficulty of difficulties"
+        [value]="difficulty.value"
+      >
+        {{ difficulty.name }}
       </option>
     </select>
     <button

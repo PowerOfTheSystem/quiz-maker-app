@@ -1,4 +1,4 @@
-import { Question } from 'src/app/models/question.model';
+import { Question } from '../../models/question.model';
 import { QuestionTO } from '../tos/question-response.to';
 
 export class QuestionMapper {
