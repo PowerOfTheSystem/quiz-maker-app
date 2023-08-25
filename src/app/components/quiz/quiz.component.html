@@ -1,0 +1,62 @@
+<h1 class="text-center">Quiz Maker</h1>
+<form #quizForm="ngForm" (ngSubmit)="onCreate(quizForm)" novalidate>
+  <div class="input-group">
+    <select
+      class="form-select"
+      name="category"
+      id="categorySelect"
+      ngModel
+      #category="ngModel"
+      [class.is-valid]="category.valid"
+      [class.is-invalid]="category.touched && category.invalid"
+      required
+    >
+      <option value="" disabled>Select a category</option>
+      <option *ngFor="let category of categories | async" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+    <select
+      class="form-select text-capitalize"
+      name="difficulty"
+      id="difficultySelect"
+      ngModel
+      #difficulty="ngModel"
+      [class.is-valid]="difficulty.valid"
+      [class.is-invalid]="difficulty.touched && difficulty.invalid"
+      required
+    >
+      <option value="" disabled>Select difficulty</option>
+      <option [value]="QuestionDifficulty.EASY">
+        {{ QuestionDifficulty.EASY }}
+      </option>
+      <option [value]="QuestionDifficulty.MEDIUM">
+        {{ QuestionDifficulty.MEDIUM }}
+      </option>
+      <option [value]="QuestionDifficulty.HARD">
+        {{ QuestionDifficulty.HARD }}
+      </option>
+    </select>
+    <button
+      type="submit"
+      class="btn btn-light border"
+      id="createBtn"
+      [disabled]="quizForm.invalid"
+    >
+      Create
+    </button>
+  </div>
+</form>
+
+<app-question
+  *ngFor="let question of questions | async; index as i"
+  [answerFormControl]="questionFormArray.controls[i]"
+  [question]="question"
+></app-question>
+
+<div
+  class="d-grid my-3"
+  *ngIf="questionFormArray.controls.length > 0 && questionFormArray.valid"
+>
+  <a class="btn btn-secondary" [routerLink]="['/result']">Submit</a>
+</div>

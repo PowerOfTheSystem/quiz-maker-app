@@ -1,0 +1,36 @@
+<p class="mt-3 mb-1" [innerHTML]="question.question"></p>
+<div>
+  <span class="me-2" *ngFor="let answer of question.answers; index as i">
+    <span
+      class="btn mt-1 hover-disable"
+      *ngIf="checkAnswers; else elseBlock"
+      [innerHTML]="answer"
+      [ngClass]="{
+        'btn-outline-danger': checkStatus(answer),
+        'btn-outline-success': !checkStatus(answer),
+        active: shouldBeChecked(answer),
+        'hover-disable': !shouldBeChecked(answer)
+      }"
+    ></span>
+    <ng-template #elseBlock>
+      <input
+        type="radio"
+        class="btn-check"
+        [name]="'answer_' + question.id"
+        [id]="'answer_' + question.id + '_' + i"
+        autocomplete="off"
+      />
+      <label
+        class="btn mt-1"
+        [for]="'answer_' + question.id + '_' + i"
+        [innerHTML]="answer"
+        [ngClass]="{
+          'btn-outline-danger': checkStatus(answer),
+          'btn-outline-success': !checkStatus(answer),
+          active: shouldBeChecked(answer)
+        }"
+        (click)="onSelectAnswer(answer)"
+      ></label>
+    </ng-template>
+  </span>
+</div>
