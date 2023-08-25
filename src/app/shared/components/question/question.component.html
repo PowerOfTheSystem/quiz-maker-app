@@ -3,7 +3,7 @@
   <span class="me-2" *ngFor="let answer of question.answers; index as i">
     <span
       class="btn mt-1 hover-disable"
-      *ngIf="checkAnswers; else elseBlock"
+      *ngIf="showAnswers; else elseBlock"
       [innerHTML]="answer"
       [ngClass]="{
         'btn-outline-danger': checkStatus(answer),

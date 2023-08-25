@@ -1,7 +1,7 @@
 export abstract class StorageService<T> {
   constructor(private readonly key: string) {}
 
-  public save(value: T) {
+  public saveData(value: T) {
     localStorage.setItem(this.key, JSON.stringify(value));
   }
 
@@ -10,11 +10,11 @@ export abstract class StorageService<T> {
     return model ? JSON.parse(model) : null;
   }
 
-  public remove() {
+  public removeData() {
     localStorage.removeItem(this.key);
   }
 
-  public clear() {
+  public clearData() {
     localStorage.clear();
   }
 }

@@ -8,15 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ScoreComponent implements OnInit {
   @Input({ required: true }) total!: number;
-  @Input({ required: true }) arrangements!: number;
+  @Input({ required: true }) totalScored!: number;
 
   constructor() {}
 
   ngOnInit() {}
 
   checkStatus() {
-    if (this.arrangements < 2) return 'bg-danger';
-    else if (this.arrangements < 4) return 'bg-warning';
+    if (this.totalScored < 2) return 'bg-danger';
+    else if (this.totalScored < 4) return 'bg-warning';
     else return 'bg-success';
   }
 }

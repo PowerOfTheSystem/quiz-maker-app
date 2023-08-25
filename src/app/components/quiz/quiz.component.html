@@ -1,47 +1,57 @@
-<h1 class="text-center">Quiz Maker</h1>
 <form #quizForm="ngForm" (ngSubmit)="onCreate(quizForm)" novalidate>
-  <div class="input-group">
-    <select
-      class="form-select"
-      name="category"
-      id="categorySelect"
-      ngModel
-      #category="ngModel"
-      [class.is-valid]="category.valid"
-      [class.is-invalid]="category.touched && category.invalid"
-      required
-    >
-      <option value="" disabled>Select a category</option>
-      <option *ngFor="let category of categories | async" [value]="category.id">
-        {{ category.name }}
-      </option>
-    </select>
-    <select
-      class="form-select text-capitalize"
-      name="difficulty"
-      id="difficultySelect"
-      ngModel
-      #difficulty="ngModel"
-      [class.is-valid]="difficulty.valid"
-      [class.is-invalid]="difficulty.touched && difficulty.invalid"
-      required
-    >
-      <option value="" disabled>Select difficulty</option>
-      <option
-        *ngFor="let difficulty of difficulties"
-        [value]="difficulty.value"
+  <h2 class="text-center">Quiz Maker</h2>
+  <br />
+  <div class="row">
+    <div class="col-5">
+      <select
+        class="form-select"
+        name="category"
+        id="categorySelect"
+        ngModel
+        #category="ngModel"
+        [class.is-valid]="category.valid"
+        [class.is-invalid]="category.touched && category.invalid"
+        required
       >
-        {{ difficulty.name }}
-      </option>
-    </select>
-    <button
-      type="submit"
-      class="btn btn-light border"
-      id="createBtn"
-      [disabled]="quizForm.invalid"
-    >
-      Create
-    </button>
+        <option value="" disabled>Select a category</option>
+        <option
+          *ngFor="let category of categories | async"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-5">
+      <select
+        class="form-select"
+        name="difficulty"
+        id="difficultySelect"
+        ngModel
+        #difficulty="ngModel"
+        [class.is-valid]="difficulty.valid"
+        [class.is-invalid]="difficulty.touched && difficulty.invalid"
+        required
+      >
+        <option value="" disabled>Select difficulty</option>
+        <option
+          *ngFor="let difficulty of difficulties"
+          [value]="difficulty.value"
+        >
+          {{ difficulty.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-2">
+      <button
+        type="submit"
+        class="btn btn-light border"
+        id="createBtn"
+        [disabled]="quizForm.invalid"
+      >
+        Create
+      </button>
+    </div>
   </div>
 </form>
 
@@ -55,5 +65,5 @@
   class="d-grid my-3"
   *ngIf="questionFormArray.controls.length > 0 && questionFormArray.valid"
 >
-  <a class="btn btn-secondary" [routerLink]="['/result']">Submit</a>
+  <a class="btn btn-secondary" [routerLink]="['/result']">submit</a>
 </div>

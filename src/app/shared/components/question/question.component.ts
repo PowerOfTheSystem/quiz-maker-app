@@ -14,24 +14,24 @@ export class QuestionComponent implements OnInit {
   choosenAnswer: string = '';
 
   @Input({ required: true }) question!: Question;
-  @Input() checkAnswers = false;
+  @Input() showAnswers = false;
   @Input() answerFormControl?: FormControl<string>;
 
   constructor() {}
 
   ngOnInit(): void {
-    if (this.checkAnswers)
+    if (this.showAnswers)
       this.choosenAnswer = this.question?.choosenAnswer ?? '';
   }
 
   public onSelectAnswer(option: string): void {
-    if (!this.checkAnswers && this.answerFormControl)
+    if (!this.showAnswers && this.answerFormControl)
       this.answerFormControl.setValue(option);
   }
 
   checkStatus(answer: string): boolean {
     return (
-      this.checkAnswers &&
+      this.showAnswers &&
       this.choosenAnswer !== this.question.correctAnswer &&
       this.choosenAnswer === answer
     );
@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
   shouldBeChecked(answer: string): boolean {
     return (
       this.choosenAnswer === answer ||
-      (this.checkAnswers && this.question.correctAnswer == answer)
+      (this.showAnswers && this.question.correctAnswer == answer)
     );
   }
 }

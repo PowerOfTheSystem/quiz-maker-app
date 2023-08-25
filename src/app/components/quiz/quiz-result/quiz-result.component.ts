@@ -17,17 +17,15 @@ import { QuizService } from '../../../services/quiz.service';
 export class QuizResultComponent implements OnInit {
   questions: Question[] = [];
   total: number = 0;
-  arrangements: number = 0;
+  totalScored: number = 0;
 
   constructor(private readonly storeService: QuizService) {}
 
   ngOnInit() {
     this.questions = this.storeService.getData() ?? [];
-
     this.total = this.questions.length;
-
     this.questions.forEach((q) => {
-      if (q.correctAnswer === q.choosenAnswer) this.arrangements++;
+      if (q.correctAnswer === q.choosenAnswer) this.totalScored++;
     });
   }
 }

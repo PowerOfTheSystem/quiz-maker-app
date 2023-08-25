@@ -16,7 +16,6 @@ import { Difficulty } from '../../models/difficulty.model';
 import { Category } from '../../models/category.model';
 import { Question } from '../../models/question.model';
 import { QuizService } from '../../services/quiz.service';
-import { QuizForm } from './quiz.form';
 
 @Component({
   selector: 'app-quiz',
@@ -36,12 +35,12 @@ import { QuizForm } from './quiz.form';
 export class QuizComponent implements OnInit, OnDestroy {
   questionFormArray: FormArray<FormControl<string>>;
 
-  categories?: Observable<Category[]>;
   difficulties?: Difficulty[] = [
     { value: 'easy', name: 'Easy' },
     { value: 'medium', name: 'Medium' },
-    { value: 'high', name: 'High' },
+    { value: 'hard', name: 'Hard' },
   ];
+  categories?: Observable<Category[]>;
   questions?: Observable<Question[]>;
 
   constructor(
@@ -53,7 +52,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.quizService.clear();
+    this.quizService.clearData();
     this.categories = this.triviaService.getCategories();
   }
 
@@ -66,15 +65,14 @@ export class QuizComponent implements OnInit, OnDestroy {
       if (quiz) quiz.choosenAnswer = question.value;
     });
 
-    this.quizService.save(storageQuizzes);
+    this.quizService.saveData(storageQuizzes);
   }
 
   public onCreate(quizForm: NgForm): void {
-    let { category, difficulty } = quizForm.value as QuizForm;
     this.questionFormArray.clear();
-    if (category)
+    if (quizForm.value.category)
       this.questions = this.triviaService
-        .getQuestions(category, difficulty)
+        .getQuestions(quizForm.value.category, quizForm.value.difficulty)
         .pipe(
           map((quizzes) => {
             let newQuizzes = quizzes.map((quiz, index) => {
@@ -87,20 +85,14 @@ export class QuizComponent implements OnInit, OnDestroy {
               return {
                 ...quiz,
                 id: index,
-                answers: this.sortAnswers(quiz.answers),
+                answers: quiz.answers.sort(() => Math.random() - 0.5),
               };
             });
 
-            this.quizService.save(newQuizzes);
+            this.quizService.saveData(newQuizzes);
 
             return newQuizzes;
           })
         );
-  }
-
-  private sortAnswers(answers: string[]): string[] {
-    return answers.sort((a, b) => {
-      return 0.5 - Math.random();
-    });
   }
 }

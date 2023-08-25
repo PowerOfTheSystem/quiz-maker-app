@@ -1,10 +1,11 @@
-<h1 class="text-center">Results</h1>
+<h2 class="text-center text-uppercase">Results</h2>
+<br />
 <app-question
   *ngFor="let question of questions"
   [question]="question"
-  [checkAnswers]="true"
+  [showAnswers]="true"
 ></app-question>
-<app-score [arrangements]="arrangements" [total]="total"></app-score>
+<app-score [totalScored]="totalScored" [total]="total"></app-score>
 <div class="d-grid my-3">
   <a class="btn btn-secondary" [routerLink]="['/']">Create a new quiz</a>
 </div>
