@@ -25,14 +25,10 @@ export class TriviaService {
   }
 
   getQuestions(categoryId: string, difficulty: string): Observable<Question[]> {
-    let params = new HttpParams()
-      .append('category', categoryId)
-      .append('difficulty', difficulty)
-      .append('amount', '5')
-      .append('type', 'multiple');
-
     return this.http
-      .get<QuizResponseTO>(`${api_base_url}/api.php`, { params })
+      .get<QuizResponseTO>(
+        `${api_base_url}/api.php?amount=5&category=${categoryId}&difficulty=${difficulty}&type=multiple`
+      )
       .pipe(
         map((quizResponseTO) =>
           quizResponseTO.results.map(QuestionMapper.toModel)
