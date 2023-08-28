@@ -3,16 +3,16 @@
   <span class="me-2" *ngFor="let answer of question.answers; index as i">
     <span
       class="btn mt-1 hover-disable"
-      *ngIf="showAnswers; else elseBlock"
+      *ngIf="showAnswers; else showQuestions"
       [innerHTML]="answer"
       [ngClass]="{
-        'btn-outline-danger': checkStatus(answer),
-        'btn-outline-success': !checkStatus(answer),
-        active: shouldBeChecked(answer),
-        'hover-disable': !shouldBeChecked(answer)
+        'btn-outline-success': !checkScore(answer),
+        'btn-outline-danger': checkScore(answer),
+        active: shouldBeSelected(answer),
+        'hover-disable': !shouldBeSelected(answer)
       }"
     ></span>
-    <ng-template #elseBlock>
+    <ng-template #showQuestions>
       <input
         type="radio"
         class="btn-check"
@@ -25,9 +25,9 @@
         [for]="'answer_' + question.id + '_' + i"
         [innerHTML]="answer"
         [ngClass]="{
-          'btn-outline-danger': checkStatus(answer),
-          'btn-outline-success': !checkStatus(answer),
-          active: shouldBeChecked(answer)
+          'btn-outline-success': !checkScore(answer),
+          'btn-outline-danger': checkScore(answer),
+          active: shouldBeSelected(answer)
         }"
         (click)="onSelectAnswer(answer)"
       ></label>

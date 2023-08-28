@@ -14,7 +14,7 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit() {}
 
-  checkStatus() {
+  checkScore() {
     if (this.totalScored < 2) return 'bg-danger';
     else if (this.totalScored < 4) return 'bg-warning';
     else return 'bg-success';

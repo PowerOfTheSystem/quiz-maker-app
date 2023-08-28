@@ -29,7 +29,7 @@ export class QuestionComponent implements OnInit {
       this.answerFormControl.setValue(option);
   }
 
-  checkStatus(answer: string): boolean {
+  checkScore(answer: string): boolean {
     return (
       this.showAnswers &&
       this.choosenAnswer !== this.question.correctAnswer &&
@@ -37,7 +37,7 @@ export class QuestionComponent implements OnInit {
     );
   }
 
-  shouldBeChecked(answer: string): boolean {
+  shouldBeSelected(answer: string): boolean {
     return (
       this.choosenAnswer === answer ||
       (this.showAnswers && this.question.correctAnswer == answer)
