@@ -34,14 +34,13 @@ import { QuizService } from '../../services/quiz.service';
 })
 export class QuizComponent implements OnInit, OnDestroy {
   questionFormArray: FormArray<FormControl<string>>;
-
+  categories?: Observable<Category[]>;
+  questions?: Observable<Question[]>;
   difficulties?: Difficulty[] = [
     { value: 'easy', name: 'Easy' },
     { value: 'medium', name: 'Medium' },
     { value: 'hard', name: 'Hard' },
   ];
-  categories?: Observable<Category[]>;
-  questions?: Observable<Question[]>;
 
   constructor(
     private readonly triviaService: TriviaService,
@@ -54,18 +53,6 @@ export class QuizComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.quizService.clearData();
     this.categories = this.triviaService.getCategories();
-  }
-
-  public ngOnDestroy(): void {
-    let storageQuizzes = this.quizService.getData() ?? [];
-
-    this.questionFormArray.controls.forEach((question, index) => {
-      let quiz = storageQuizzes[index];
-
-      if (quiz) quiz.choosenAnswer = question.value;
-    });
-
-    this.quizService.saveData(storageQuizzes);
   }
 
   public onCreate(quizForm: NgForm): void {
@@ -94,5 +81,17 @@ export class QuizComponent implements OnInit, OnDestroy {
             return newQuizzes;
           })
         );
+  }
+
+  public ngOnDestroy(): void {
+    let storageQuizzes = this.quizService.getData() ?? [];
+
+    this.questionFormArray.controls.forEach((question, index) => {
+      let quiz = storageQuizzes[index];
+
+      if (quiz) quiz.choosenAnswer = question.value;
+    });
+
+    this.quizService.saveData(storageQuizzes);
   }
 }

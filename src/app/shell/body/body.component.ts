@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,8 +8,6 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   standalone: true,
 })
-export class BodyComponent implements OnInit {
+export class BodyComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

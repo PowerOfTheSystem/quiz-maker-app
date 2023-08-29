@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-score',
@@ -6,13 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./score.component.css'],
   standalone: true,
 })
-export class ScoreComponent implements OnInit {
+export class ScoreComponent {
   @Input({ required: true }) total!: number;
   @Input({ required: true }) totalScored!: number;
 
   constructor() {}
-
-  ngOnInit() {}
 
   checkScore() {
     if (this.totalScored < 2) return 'bg-danger';
